@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="css/ui-lightness/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+
+    <script type="text/javascript" src="js/jquery/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="ckeditor/adapters/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery/plugins/jquery.disable.text.select.js"></script>
+    <script type="text/javascript" src="js/jquery-ui/jquery-ui-1.10.3.custom.min.js"></script>
+    
+    <script type="text/javascript" src="js/pager.js"></script>
+    <script type="text/javascript" src="js/photoSelector.js"></script>
+    <script type="text/javascript" src="js/editor.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript">
+            $(function () {
+                /**
+                 * Конфиг ckeditor
+                 * Настройка тулбара
+                 */
+        $("#field_noteeditor").ckeditor({
+                    skin : "moono",
+					removePlugins : "elementspath",
+					resize_enabled : false,
+					autoUpdateElement : true,
+					disableObjectResizing : true,
+					forcePasteAsPlainText : true,
+					toolbarCanCollapse : false,
+					extraPlugins : 'bold,,tezis,insertphoto', 
+					language : 'ru',
+					height : '400px',
+					contentsCss : ['/css/style-ckeditor.css'],
+					browserContextMenuOnCtrl : true,
+/*					enterMode : CKEDITOR.ENTER_P,*/
+
+					toolbar : [["rtBold","-","rtHeader","-","rtTezis","-","rtPhoto","-"]] 
+		});
+        
+        
+	});
+	</script>
+</head>
+<body>
+	<textarea cols="80" id="field_noteeditor" rows="10"></textarea>
+</body>
+</html>

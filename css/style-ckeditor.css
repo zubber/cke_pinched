@@ -1,0 +1,60 @@
+.line{background:#eeeeee;margin:0px 3px 3px 3px;height:23px}
+.line a{display:block;border-right:1px solid #ffffff;float:left;height:23px}
+body {font-family: Tahoma,Arial,sans-serif; line-height: 1.3;}
+p {font-size:12px;color:#666666;margin:0px 10px 0px 0px;padding:0px 0px 9px 0px}
+h2 {font-weight: normal;margin:0px 0px 0px 0px;color:#58585a;font-size:18px;padding:0px 0px 7px 0px}
+
+.clear_both, .clear_left, .clear_right { clear: both; padding: 0px; margin: 0px; font-size: 0px; line-height: 0px; height: 0px; overflow: hidden;}
+
+.picture {margin:0px 10px 18px 0px;border:1px dashed #afafaf;}
+.picture img{/*margin:-17px 0px 0px 0px*/}
+.picture .img {height: 363px;}
+.picture .t{border-top:1px dashed #afafaf;padding:3px 7px 7px 7px;font-size:12px;line-height:16px;color:#ababab}
+.picture .t .add_desc{font-size: 12px;color: #1d82a2;font-weight: bolder;padding: 0px 0px 0px 1px;margin: -1px 0px -1px 0px;}
+.picture .t .add_desc a{background: url(/i/ico_plus_blue2.gif) no-repeat 0 5px;color: #1d82a2;text-decoration: none;padding: 0px 0px 0px 13px;}
+.picture .t .add_desc a span{background: url(/i/dashed_1d82a2_2.gif) repeat-x left bottom;}
+.picture .t p{display: block;margin: 0px 25px 0px 0px;padding: 0px;color: #ABABAB;}
+.picture .t .edit{float: right;margin: 1px -3px 0px 0px;}
+.picture .del{float:right;margin:2px 2px 0px 0px}
+.del{background:url(/i/ico_del_x.gif) no-repeat 0px 0px;display:block;width:15px;height:15px;cursor:pointer}
+.edit{background:url(/i/ico_ne_edit.gif) no-repeat 0px 0px;display:block;width:15px;height:15px;cursor:pointer}
+.line_head{background:url(/i/voln_line.gif) repeat-x left top;margin:7px 10px 10px 0px}
+.line_head .vn{background:url(/i/voln_line.gif) repeat-x left bottom;padding:9px 4px 9px 4px;zoom:1}
+.line_head p{text-align:center;font-family:Georgia,"Times New Roman",Arial,sans-serif;font-size:18px;line-height:20px;color:#666666;margin:0px 20px 0px 20px;padding:8px 0px 9px 0px}
+.line_head .buttons{float:right;width:15px}
+.line_head .buttons .edit{margin-top:-1px}
+
+.gallery{border:1px dashed #afafaf;margin: 10px 10px 0px 0px;}
+.gallery .title{font-size:18px;line-height:normal;color:#ababab;border-bottom:1px dashed #afafaf;padding:2px 4px 5px 8px;margin:0px;font-weight:normal}
+.gallery .title .del{float:right;margin-top:5px}
+.gallery .title .edit{float:left;margin-top:5px}
+.gallery .title div {margin: 0px 20px 0px 20px;padding: 1px 0px 0px 0px;}
+.gallery .cont{padding:6px 6px 6px 6px;border-bottom:1px dashed #afafaf;}
+.gallery .cont .imgs{margin:0px 0px 0px -4px}
+.gallery .cont .imgs ul{list-style-type:none;margin:0px;padding:0px}
+.gallery .cont .imgs ul li{display:block;float:left;font-size:0px;line-height:0px;margin:0px 0px 4px 4px;padding:0px;border: 1px solid #D3D3D3; width: 68px;}
+.gallery .cont .imgs ul li div {background: url(/i/px.gif) no-repeat center center #FFFFFF;float: left;height: 60px;padding: 4px;width: 60px; overflow: hidden;}
+.gallery .cont .imgs ul li.act {background: url(/i/thumb_active.gif) no-repeat center center; border: 0px; width: 70px;}
+.gallery .cont .imgs ul li.act div {padding: 5px;}
+.gallery .cont .imgs ul li span{margin: 0px 0px 0px -67px;}
+.gallery .cont .imgs ul li span input {margin-top: 5px;}
+.gallery .cont .imgs ul li.act span {margin: 0px 0px 0px -68px;}
+.gallery .cont .imgs ul li.act span input {margin-top: 6px;}
+ .gallery .cont .buttons{height:20px;background:#f1f1f1;margin:0px 0px 7px 0px}
+.gallery .cont .buttons ul{list-style-type:none;margin:0px;padding:0px}
+.gallery .cont .buttons ul li{margin:0px;padding:0px;float:left;height:20px;font-size:11px;color:#666666}
+.gallery .cont .buttons ul li a{display:block;float:left;height:18px;border-right:1px solid #ffffff;padding:2px 5px 0px 0px;color:#666666;text-decoration:none}
+.gallery .cont .buttons ul li.ico_check a{background:url(/i/ico_check.gif) no-repeat 5px 7px;padding-left:17px}
+.gallery .cont .buttons ul li.ico_delete a{background:url(/i/ico_delete.gif) no-repeat 5px 7px;padding-left:17px}
+.gallery .cont .buttons ul li.ico_plus a{background:url(/i/ico_plus.gif) no-repeat 5px 7px;padding-left:17px}
+.gallery .desc{padding:3px 7px 7px 7px;font-size:12px;line-height:16px;color:#ababab}
+.gallery .desc p{display: block;margin: 0px 25px 0px 0px;padding: 0px;color: #ABABAB;}
+.gallery .desc .edit{float: right;margin: 1px -3px 0px 0px;}
+
+.line a.btn_bold, .line a.btn_em, .line a.btn_line{/*width:22px*/}
+.line a.btn_bold{background:url(/i/ico_btn_bold.gif) no-repeat 0px 0px;padding:0px 7px 0px 19px}
+.line a.btn_em{background:url(/i/ico_btn_em.gif) no-repeat 0px 0px;padding:0px 7px 0px 20px}
+.line a.btn_line{background:url(/i/ico_btn_line.gif) no-repeat 0px 0px;padding:0px 7px 0px 20px}
+.line a.btn_img{background:url(/i/ico_btn_img.gif) no-repeat 0px 0px;padding:0px 7px 0px 21px}
+.line a.btn_gal{background:url(/i/ico_btn_gal.gif) no-repeat 0px 0px;padding:0px 7px 0px 23px}
+.line a{font-size:10px;line-height:23px;color:#000000;text-decoration:none}
