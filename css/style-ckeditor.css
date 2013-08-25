@@ -6,7 +6,7 @@ h2 {font-weight: normal;margin:0px 0px 0px 0px;color:#58585a;font-size:18px;padd
 
 .clear_both, .clear_left, .clear_right { clear: both; padding: 0px; margin: 0px; font-size: 0px; line-height: 0px; height: 0px; overflow: hidden;}
 
-.picture {margin:0px 10px 18px 0px;border:1px dashed #afafaf;}
+.picture {margin:0px 10px 18px 0px;border:1px dashed #afafaf; margin:auto;}
 .picture img{/*margin:-17px 0px 0px 0px*/}
 .picture .img {height: 363px;}
 .picture .t{border-top:1px dashed #afafaf;padding:3px 7px 7px 7px;font-size:12px;line-height:16px;color:#ababab}

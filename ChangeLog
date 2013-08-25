@@ -1,0 +1,18 @@
+commit 6247c87b4b6e600e80e635b8df52317365fd9af6
+Merge: 374d321 0a7a9cd
+Author: malyutinv <zubber@mail.ru>
+Date:   Sun Aug 18 14:22:20 2013 -0400
+
+    resolve REMTE.md
+
+commit 374d321c470e8a3a80ab58e4e1add0df5ac4f850
+Author: malyutinv <zubber@mail.ru>
+Date:   Sun Aug 18 12:28:47 2013 -0400
+
+    первичная инициализация
+
+commit 0a7a9cd4558b6b84d480901b83aa2cdc5be35022
+Author: malyutinv <zubber@mail.ru>
+Date:   Sun Aug 18 09:22:33 2013 -0700
+
+    Initial commit

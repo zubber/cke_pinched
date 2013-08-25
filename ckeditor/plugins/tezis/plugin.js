@@ -10,78 +10,13 @@ $(document).ready(function(){
          * PS: до загрузки данных и отображения
          */
         init : function( editor ) {
-            
-            /**
-             * Создаем команду для тулбара
-             * открывает диалог и посылает команду для добавления контента
-             */
-            editor.addCommand('rt_cmd_dialog_tezis', {
-                
-                exec: function (editor, data) {
-                    
-                    // определяем текущий элемент
-                    var sel = editor.getSelection(),
-                    element = sel.getStartElement();
-                    var insertMode;
-                    var tezis;
-                    
-                    // редактирование или добавление
-                    if (isDefined(data)) {
-                        
-                        tezis = $(data);
-                        if (!tezis.hasClass('line_head')) {
-                            
-                            tezis = tezis.parents('.line_head');
-                        }
-                        insertMode = false;
-                    } else if (element) {
-                        
-                        if ($(element['$']).hasClass('line_head')) {
-                            
-                            tezis = $(element['$']);
-                        } else {
-                            
-                            tezis = $(element['$']).parents('.line_head');
-                        }
-                        
-                        insertMode = element.data( 'cke-realelement' ) || !tezis.size();
-                    } else {
-                        
-                        insertMode = true;
-                    }
-                    
-                    if (insertMode) {
-                        
-                        // инициализация полей диалога значениями по умолчанию
-                        $('#' + editor.name).trigger('showTezis', [function(message){
-                            
-                            if ($.trim(message).length) {
-                                
-                                // посылаем команду для добавления контента
-                                editor.execCommand('rt_cmd_tezis', [message]);
-                            }
-                        }, '']);
-                    } else {
-                        
-                        // инициализация полей диалога значениями из текущего элемента
-                        $('#' + editor.name).trigger('showTezis', [function(message){
-                            
-                            if ($.trim(message).length) {
-                                
-                                tezis.find('p').text(message);
-                            }
-                        }, tezis.find('p').text()]);
-                    }
-                }
-            });
-            
             /**
              * Событие для обработки нажатия по клавише Редактировать
              * PS: нужно инициализировать при добавлении нового и открытии сохраненного
              */
             var editClick = function(){
                 
-                editor.execCommand('rt_cmd_dialog_tezis', [this]);
+                editor.execCommand('pl_cmd_dialog_tezis', [this]);
                 return false;
             };
             
@@ -92,13 +27,10 @@ $(document).ready(function(){
             var delClick = function(){
                 
                 var element = $(this).parents('.line_head');
-                confirm('Вы действительно хотите удалить данный тезис?', function(result){
-                    
-                    if (result) {
-                        
-                        element.remove();
-                    }
-                }, undefined, undefined, 'Создание заметки');
+                var result = confirm('Вы действительно хотите удалить данный тезис?', undefined, undefined, 'Создание заметки');
+                if (result) {
+                    element.remove();
+                }
                 return false;
             };
             
@@ -115,7 +47,7 @@ $(document).ready(function(){
                                 </div>\
                                 <p contenteditable="false">' + message + '</p>\
                             </div>\
-                        </div>';
+                        </div><p>&nbsp;</p>';
             };
             
             /**
@@ -187,9 +119,13 @@ $(document).ready(function(){
             };
             
             /**
+             * ************* Команды редактора
+             */
+
+            /**
              * Создаем команду для добавления контента
              */
-            editor.addCommand('rt_cmd_tezis', {
+            editor.addCommand('pl_cmd_tezis', {
                 
                 exec: function(editor, data) {
                     
@@ -200,44 +136,104 @@ $(document).ready(function(){
             });
             
             /**
-             * Добавляем клавишу для тулбара, нажатие по которой заставит открыть диалог
+             * Создаем команду для тулбара
+             * открывает диалог и посылает команду для добавления контента
              */
-            editor.ui.addButton('rtTezis', {
-                icon    : '/i/ico_btn_line.gif',
-                label   : 'Вставить тезис',
-                command : 'rt_cmd_dialog_tezis'
+            editor.addCommand('pl_cmd_dialog_tezis', {
+                
+                exec: function (editor, data) {
+                    
+                    // определяем текущий элемент
+                    var sel = editor.getSelection(),
+                    element = sel.getStartElement();
+                    var insertMode;
+                    var tezis;
+                    
+                    // редактирование или добавление
+                    if (isDefined(data)) {
+                        
+                        tezis = $(data);
+                        if (!tezis.hasClass('line_head')) {
+                            
+                            tezis = tezis.parents('.line_head');
+                        }
+                        insertMode = false;
+                    } else if (element) {
+                        
+                        if ($(element['$']).hasClass('line_head')) {
+                            
+                            tezis = $(element['$']);
+                        } else {
+                            
+                            tezis = $(element['$']).parents('.line_head');
+                        }
+                        
+                        insertMode = element.data( 'cke-realelement' ) || !tezis.size();
+                    } else {
+                        
+                        insertMode = true;
+                    }
+                    
+                    if (insertMode) {
+                        
+                        // инициализация полей диалога значениями по умолчанию
+                        $('#' + editor.name).trigger('showTezis', [function(message){
+                            
+                            if ($.trim(message).length) {
+                                
+                                // посылаем команду для добавления контента
+                                editor.execCommand('pl_cmd_tezis', [message]);
+                            }
+                        }, '']);
+                    } else {
+                        
+                        // инициализация полей диалога значениями из текущего элемента
+                        $('#' + editor.name).trigger('showTezis', [function(message){
+                            
+                            if ($.trim(message).length) {
+                                
+                                tezis.find('p').text(message);
+                            }
+                        }, tezis.find('p').text()]);
+                    }
+                }
             });
+
             
+            /**
+             * ************* События
+             */
+
             /**
              * Настраиваем попап-меню по клику на правую клавишу мыши
              */
-            if (editor.contextMenu) {
+            // if (editor.contextMenu) {
                 
-                // по нажатию будет открывать диалог
-                editor.addMenuGroup('rutraveller');
-                editor.addMenuItem('tezisItem', {
-                    label   : 'Редактировать',
-                    icon    : '/i/ico_ne_edit.gif',
-                    command : 'rt_cmd_dialog_tezis',
-                    group   : 'rutraveller'
-                });
+            //     // по нажатию будет открывать диалог
+            //     editor.addMenuGroup('rutraveller');
+            //     editor.addMenuItem('tezisItem', {
+            //         label   : 'Редактировать',
+            //         icon    : '/i/ico_ne_edit.gif',
+            //         command : 'pl_cmd_dialog_tezis',
+            //         group   : 'rutraveller'
+            //     });
                 
-                // настраиваем место, клик по которому покажет меню Редактировать
-                editor.contextMenu.addListener( function( element ) {
+            //     // настраиваем место, клик по которому покажет меню Редактировать
+            //     editor.contextMenu.addListener( function( element ) {
                     
-                    if (element) {
+            //         if (element) {
                         
-                        element = ($(element['$']).hasClass('line_head') || $(element['$']).parents('.line_head').size()) && !element.data('cke-realelement');
-                    }
+            //             element = ($(element['$']).hasClass('line_head') || $(element['$']).parents('.line_head').size()) && !element.data('cke-realelement');
+            //         }
                     
-                    if (element) {
+            //         if (element) {
                         
-                        return {tezisItem : CKEDITOR.TRISTATE_OFF};
-                    }
+            //             return {tezisItem : CKEDITOR.TRISTATE_OFF};
+            //         }
                     
-                    return null;
-                });
-            }
+            //         return null;
+            //     });
+            // }
             
             /**
              * Создаем клавиши и назначаем события на них
@@ -294,6 +290,15 @@ $(document).ready(function(){
                     prepareEditHTML(e.editor.document);
                     setEditEvents(e.editor.document['$']);
                 }
+            });
+            
+            /**
+             * Добавляем клавишу для тулбара, нажатие по которой заставит открыть диалог
+             */
+            editor.ui.addButton('Tezis', {
+                icon    : '/i/ico_btn_line.gif',
+                label   : 'Вставить тезис',
+                command : 'pl_cmd_dialog_tezis'
             });
         }
     });

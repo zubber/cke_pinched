@@ -1,6 +1,6 @@
-CKEDITOR.on('instanceReady', function( ev ) {
+CKEDITOR.on('instanceReady', function( ev ) { 
     //инитим кнопки
-    var obj = new editor();
+    var obj = new editor(); 
     obj.prepareTezis();
     obj.preparePhotoDialog();
 
@@ -32,48 +32,48 @@ CKEDITOR.on('instanceReady', function( ev ) {
     /**
      * запрещаем удалять div-ы c помощью кнопок delete и backspace
      */
-/*
+
     ev.editor.on("key", function (e) {
         var ranges,curRange,boundaryNodes;
+        // if(e.data.keyCode == 8){ //backspace
+        //     ranges = e.editor.getSelection().getRanges();
+        //     curRange = ranges[0];
 
-        if(e.data.keyCode == 8){ //backspace
-            ranges = e.editor.getSelection().getRanges();
-            curRange = ranges[0];
+        //     boundaryNodes = curRange.getBoundaryNodes();
 
-            boundaryNodes = curRange.getBoundaryNodes();
+        //     if (curRange.startOffset == 0 && curRange.endOffset == curRange.startOffset
+        //         && curRange.startContainer["$"] == curRange.endContainer["$"]) {
 
-            if (curRange.startOffset == 0 && curRange.endOffset == curRange.startOffset
-                && curRange.startContainer["$"] == curRange.endContainer["$"]) {
+        //         if ( "div" == $(boundaryNodes.startNode["$"]).parent().prev().children(":first").get(0).nodeName.toLowerCase()){
+        //             e.cancel();
+        //         }
+        //     }
 
-                if ( "div" == $(boundaryNodes.startNode["$"]).parent().prev().children(":first").get(0).nodeName.toLowerCase()){
-                    e.cancel();
-                }
-            }
+        //     return false;
+        // } else if (e.data.keyCode == 46){//delete
 
-            return false;
-        } else if (e.data.keyCode == 46){//delete
+        //     ranges = e.editor.getSelection().getRanges();
+        //     curRange = ranges[0];
 
-            ranges = e.editor.getSelection().getRanges();
-            curRange = ranges[0];
+        //     boundaryNodes = curRange.getBoundaryNodes();
 
-            boundaryNodes = curRange.getBoundaryNodes();
+        //     if (curRange.startOffset == curRange.startContainer["$"].length
+        //         && curRange.endOffset == curRange.startOffset
+        //         && curRange.startContainer["$"] == curRange.endContainer["$"]
+        //         && typeof $(boundaryNodes.endNode["$"]).parent().next().children(":first").get(0) != "undefined"
+        //         && "div" == $(boundaryNodes.endNode["$"]).parent().next().children(":first").get(0).nodeName.toLowerCase()
+        //         || typeof $(boundaryNodes.endNode["$"]).next().children().get(1) != "undefined"
+        //         && "div" == $(boundaryNodes.endNode["$"]).next().children().get(1).nodeName.toLowerCase()) {
 
-            if (curRange.startOffset == curRange.startContainer["$"].length
-                && curRange.endOffset == curRange.startOffset
-                && curRange.startContainer["$"] == curRange.endContainer["$"]
-                && typeof $(boundaryNodes.endNode["$"]).parent().next().children(":first").get(0) != "undefined"
-                && "div" == $(boundaryNodes.endNode["$"]).parent().next().children(":first").get(0).nodeName.toLowerCase()
-                || typeof $(boundaryNodes.endNode["$"]).next().children().get(1) != "undefined"
-                && "div" == $(boundaryNodes.endNode["$"]).next().children().get(1).nodeName.toLowerCase()) {
+        //             e.cancel();
+        //     }
 
-                    e.cancel();
-            }
+        //     return false;
 
-            return false;
-
-        //обработка нажатий курсорных клавиш чтобы в ИЕ не заходил внутрь блоков div
-        //обработку нужно вызвать через какое-то время, чтобы курсор оказался внутри блока
-        } else if (e.data.keyCode == 39 || e.data.keyCode == 40){//right & down arrows
+        // //обработка нажатий курсорных клавиш чтобы в ИЕ не заходил внутрь блоков div
+        // //обработку нужно вызвать через какое-то время, чтобы курсор оказался внутри блока
+        // } else 
+        if (e.data.keyCode == 39 || e.data.keyCode == 40){//right & down arrows
             var fCharTimeout;
 
             var forwardHandler = function(){
@@ -109,13 +109,10 @@ CKEDITOR.on('instanceReady', function( ev ) {
             bCharTimeout = setTimeout(bakcwardHandler, 10);
         }
     });
-*/
+
 
     //убираем пустые теги P вокруг DIV
     ev.editor.on('clearEmptyP', function(ev){
-        //trace('clearEmptyP');
-        //trace(ev.editor.document.getBody().getHtml());
-
         if(CKEDITOR.env.ie){//для IE вычищаем _</placeholder>
             ev.editor.document.getBody().setHtml(
                 ev.editor.document.getBody().getHtml().replace(/_?<\/placeholder>/ig, "")
@@ -137,6 +134,16 @@ CKEDITOR.on('instanceReady', function( ev ) {
             }
 
         }
+        
+        // var pars = ev.editor.document.getElementsByTag("p"), el_html;
+        // for (var i = pars.count()-1; i >= 0; i--) {
+        //     el = pars.getItem(i);
+        //     el_html = el.getText();
+        //     if ( el.hasPrevious() && el.getPrevious() && el_html == '↵' ) {
+        //          el.remove();
+        //     }
+                
+        // }
 
         ev.editor.fire("rtUpdateControls");
 
@@ -221,3 +228,160 @@ function moveCarrierToPrevParagraph(event){
 
     return moved;
 }
+
+//сервисные функци
+
+//определена ли переменная
+function isDefined (mixed) {
+    
+    return typeof(mixed) != 'undefined';
+}
+
+//является ли функцией переменная
+function isFunction (mixed) {
+    
+    return isDefined(mixed) && mixed.constructor == Function;
+}
+
+function editor() {}
+
+editor.prototype.callback = 0;
+
+editor.prototype.prepareTezis = function() {
+
+    var _self = this;
+
+    // объект счетчика
+    var counter = $('#tezis_counter');
+    var maxLength = 140;
+
+    // подключаем возможность вызова окна для ввода тезиса
+    $('#' + CKEDITOR.instances['field_noteeditor'].name).bind('showTezis', function(event, callback, message){
+
+        _self.showTezis(callback);
+        $('#add_tezis input').val(message);
+        $('#add_tezis input').focus();
+        $('#add_tezis input').blur();
+        counter.html((maxLength - message.length) + " символов.</b>");
+    });
+
+    $('#add_tezis .cancel').click(function(){
+        $('#add_tezis .close').click();
+        return false;
+    });
+
+    // закрытие всплывающего окна для ввода тезиса
+    $('#add_tezis .close').click(function(event){
+
+        if ($(this).hasClass('choose')) {
+
+            if (isDefined(_self.callback) && $.isFunction(_self.callback)) {
+
+                _self.callback($('#add_tezis input').val().replace(/<\/?[^>]+>|\&[^;]+;/gi, ''));
+                _self.callback = 0;
+            }
+        }
+    });
+
+    // счетчик символов
+    $('#add_tezis input').bind('focus keyup', function(){
+
+        var len = $(this).val().length;
+        if (len <= maxLength) {
+
+            counter.html((maxLength - len) + " символов.</b>");
+        } else {
+
+            counter.html(len + " символов.</b>");
+        }
+    });
+};
+
+editor.prototype.showInsertPhoto = function(callback) {
+    
+    this.callback = callback;
+    $('#insertphoto_dialog').centering().overlay().show();
+    $('#overlay').click(function(){
+        $('#insertphoto_dialog .close:not(.choose)').trigger('click');
+    });
+};
+
+editor.prototype.showTezis = function(callback) {
+    
+    this.callback = callback;
+    $('#add_tezis').centering().overlay().show();
+    $('#overlay').click(function(){
+        $('#add_tezis .close:not(.choose)').trigger('click');
+    });
+};
+
+
+editor.prototype.preparePhotoDialog = function() {
+
+    var _self = this;
+
+    //создаём объект селектора фото - для выбора фотографий и галерей
+    var params = {};
+	params.user_id = 1;
+	params.dopParams = 2;
+	// window.photoSelector = new PhotoSelector(params); сначала разобраться с $.telmplate
+};
+
+// создаем окно моделирующее модальность всплывающего окна
+$.fn.overlay=function() {
+    
+    var el=$(this);
+    $('body').prepend('<div id="overlay"></div>');
+    $('#overlay').click(function(){
+        el.hide();
+        /*$('tr').removeClass('gr_tr');*/
+        $('#overlay').remove();
+    });
+    
+    $('#overlay').show('slow');
+    return this;
+};
+
+$.fn.overlay_white=function() {
+    var el=$(this);
+    $('body').prepend('<div id="overlay_white"></div>');
+    $('#overlay_white').show('slow');
+    return this;
+}
+
+// размещение всплывающего окна по центру окна
+$.fn.centering=function() {
+    this.css("position","absolute");
+    var top = ( $(window).height() - this.height() ) / 2 + $(window).scrollTop();
+    if (top < 20) {
+        top = 20;
+    }
+    this.css("top", top + "px");
+    this.css("left", ($(window).width() - this.width() ) / 2+$(window).scrollLeft() + "px");
+    return this;
+};
+
+new function($) {
+    $.fn.setCursorPosition = function(pos) {
+        if ($(this).get(0).setSelectionRange) {
+            $(this).get(0).setSelectionRange(pos, pos);
+        } else if ($(this).get(0).createTextRange) {
+            var range = $(this).get(0).createTextRange();
+            range.collapse(true);
+            range.moveEnd('character', pos);
+            range.moveStart('character', pos);
+            range.select();
+        }
+    }
+}(jQuery);
+
+$(document).ready(function(){
+    // общее закрытие для всплывающих окон
+    $('.popup .close').click(function(){
+    
+        $(this).parents('.popup').hide();
+        $('#overlay').remove();
+        return false;
+    });
+});
+// END editor

@@ -1,0 +1,2 @@
+{"ts":1376926063737,"silentsave":true,"restoring":false,"patch":[[]],"length":0}
+{"contributors":[],"silentsave":false,"ts":1376926140517,"patch":[[{"diffs":[[1,"<?php\r\n    $db_host = 'u65603.mysql.masterhost.ru';\r\n    $db_user = 'u65603_2';\r\n    $db_pass = '32ylaterca';\r\n    $db_name = 'u65603_test';\r\n?>\r\n"]],"start1":0,"start2":0,"length1":0,"length2":146}]],"length":146,"saved":false}
